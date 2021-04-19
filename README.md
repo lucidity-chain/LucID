@@ -1,2 +1,2 @@
 # LucID
-Lucidity protocol that creates a safe, digital ID on Blockchain ecosystems
+A Lucidity protocol that creates a safe, digital ID on Blockchain ecosystems
