@@ -8,8 +8,8 @@ interface LucID /* is ERC165 */ {
     /// @dev This emits when ownership of any iNFT changes by any mechanism.
     event Transfer(address indexed _from, address indexed _to, uint256 indexed _infoHash);
     
-    /// @dev This emits when `_owner` exchanges ownership of the `_old` token for ownership of
-    ///   the `_new` token. 
+    /// @dev This emits when `_owner` exchanges ownership of the `_old` iNFT for ownership of
+    ///   the `_new` iNFT. 
     event Exchange(address indexed _owner, bytes32 _old, bytes32 _new);
 
     /// @notice Count all iNFTs assigned to an owner (by current contract)
