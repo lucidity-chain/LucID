@@ -8,8 +8,8 @@ interface LucID /* is ERC165 */ {
     /// @dev This emits when ownership of any iNFT changes by any mechanism.
     event Transfer(address indexed _from, address indexed _to, uint256 indexed _infoHash);
     
-    /// @dev This emits when _owner exchanges ownership of the _old token for ownership
-    ///   of the _new token. 
+    /// @dev This emits when `_owner` exchanges ownership of the `_old` token for ownership of
+    ///   the `_new` token. 
     event Exchange(address indexed _owner, bytes32 _old, bytes32 _new);
 
     /// @notice Count all iNFTs assigned to an owner (by current contract)
@@ -35,23 +35,23 @@ interface LucID /* is ERC165 */ {
     
     /// @notice Assign new iNFT to an address
     /// @dev Only the account which created the smart contract can call this function
-    /// @dev For obvious security reasons, the address _to cannot be the account which
-    ///   created the smart contract.
-    /// @dev In order to mint iNFT for an exchange, set address _to as the location of the 
+    /// @dev For obvious security reasons, the address `_to` cannot be the account which created
+    ///   the smart contract.
+    /// @dev In order to mint iNFT for an exchange, set address `_to` as the location of the 
     ///   current smart contract
     /// @param _to The address to assign the iNFT to
     /// @param _infoHash The hash of the personal information to be connected with the address
     function mintINFT(address _to, bytes32 _infoHash) external payable;
     
     /// @notice Creates new exchange for iNFT replacement
-    /// @dev Only the _owner account or the account which created the smart contract
-    ///   can call this function
-    /// @dev Address _owner must own the _old token
+    /// @dev Only the `_owner` account or the account which created the smart contract can call
+    ///   this function
+    /// @dev Address `_owner` must own the `_old` token
     /// @dev Make sure the exchange ID is not taken already
     /// @param _owner Owner of the _old token
-    /// @param _old Hash of the information in the old iNFT, which the _owner wishes to exchange
+    /// @param _old Hash of the information in the old iNFT, which the `_owner` wishes to exchange
     ///   ownership with
-    /// @param _new Hash of the information in the new iNFT, which the _owner wishes to exchange 
+    /// @param _new Hash of the information in the new iNFT, which the `_owner` wishes to exchange 
     ///   ownership for
     /// @return Numerical exchange ID
     function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable returns (uint256);
@@ -62,12 +62,12 @@ interface LucID /* is ERC165 */ {
     function signExchange(uint256 _bondID) external payable;
     
     /// @notice Seals an exchange for iNFT replacement, transferring the _new iNFT from its
-    ///   temporary ownership in the smart contract to the _owner address, and transferring
-    ///   the ownership of the _old iNFT to the smart contract
+    ///   temporary ownership in the smart contract to the `_owner` address, and transferring
+    ///   the ownership of the `_old` iNFT to the smart contract
     /// @dev Only the accounts which created the exchange can call this function
     /// @dev Throw if one party has not signed the exchange
-    /// @dev Throw if the _new iNFT is not owned by the smart contract
-    /// @dev Throw if the _old iNFT is not owned by the _owner
+    /// @dev Throw if the `_new` iNFT is not owned by the smart contract
+    /// @dev Throw if the `_old` iNFT is not owned by the `_owner`
     /// @param _bondID Numerical exchange ID
     function sealExchange(uint256 _bondID) external payable;
     
