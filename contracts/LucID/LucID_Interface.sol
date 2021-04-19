@@ -23,18 +23,14 @@ interface LucID /* is ERC165 */ {
     /// @return The address of the owner of the iNFT
     function ownerOf(bytes32 _infoHash) external view returns (address);
     
-    /// @notice Transfers the ownership of an NFT from one address to another address
-    /// @dev Throws unless `msg.sender` is the current owner, an authorized
-    ///  operator, or the approved address for this NFT. Throws if `_from` is
-    ///  not the current owner. Throws if `_to` is the zero address. Throws if
-    ///  `_tokenId` is not a valid NFT. When transfer is complete, this function
-    ///  checks if `_to` is a smart contract (code size > 0). If so, it calls
-    ///  `onERC721Received` on `_to` and throws if the return value is not
-    ///  `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`.
-    /// @param _from The current owner of the NFT
-    /// @param _to The new owner
-    /// @param _tokenId The NFT to transfer
-    /// @param data Additional data with no specified format, sent in call to `_to`
+    /// @notice Transfers the ownership of an iNFT from one address to another address
+    /// @dev Throw unless `msg.sender` is the current owner.
+    /// @dev Throw if `_from` is not the current owner.
+    /// @dev Throw if `_to` is the zero address.
+    /// @dev Throw if `_infoHash` is not a valid iNFT. 
+    /// @param _from Current address which owns the iNFT
+    /// @param _to New address which will own the iNFT
+    /// @param _infoHash iNFT to transfer
     function transferFrom(address _from, address _to, bytes32 _infoHash) external payable;
     
     /// @notice Assign new iNFT to an address
@@ -76,10 +72,10 @@ interface LucID /* is ERC165 */ {
     function sealExchange(uint256 _bondID) external payable;
     
     /// @notice Name of issuing authority
-    function name() external view returns (string _name);
+    function name() external view returns (string memory);
     
     /// @notice Type of document the iNFTs represent
-    function docType() external view returns (string _docType);
+    function docType() external view returns (string memory);
 }
 
 interface ERC165 {
