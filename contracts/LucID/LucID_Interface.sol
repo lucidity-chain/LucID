@@ -5,11 +5,11 @@ interface LucID /* is ERC165 */ {
     /// @dev This emits when a new iNFT is minted
     event NewINFT(address indexed _to, bytes32 indexed _infoHash);
     
-    /// @dev This emits when ownership of any iNFT changes by any mechanism.
+    /// @dev This emits when ownership of any iNFT changes by any mechanism
     event Transfer(address indexed _from, address indexed _to, uint256 indexed _infoHash);
     
     /// @dev This emits when `_owner` exchanges ownership of the `_old` iNFT for ownership of
-    ///   the `_new` iNFT. 
+    ///   the `_new` iNFT
     event Exchange(address indexed _owner, bytes32 _old, bytes32 _new);
     
     /// @notice Find the owner of an iNFT based on the sha-3 hash of its information
@@ -19,17 +19,17 @@ interface LucID /* is ERC165 */ {
     function ownerOf(bytes32 _infoHash) external view returns (address);
     
     /// @notice Transfers the ownership of an iNFT from one address to another address
-    /// @dev Throw unless `msg.sender` is the current owner.
-    /// @dev Throw if `_to` is the zero address.
-    /// @dev Throw if `_infoHash` is not a valid iNFT. 
+    /// @dev Throw unless `msg.sender` is the current owner
+    /// @dev Throw if `_to` is the zero address
+    /// @dev Throw if `_infoHash` is not a valid iNFT
     /// @param _to New address which will own the iNFT
     /// @param _infoHash iNFT to transfer
     function transferFrom(address _from, address _to, bytes32 _infoHash) external payable;
     
     /// @notice Assign new iNFT to an address
     /// @dev Only the account which created the smart contract can call this function
-    /// @dev For obvious security reasons, the address `_to` cannot be the account which created
-    ///   the smart contract.
+    /// @dev Throw if `_to` is the zero address
+    /// @dev Throw if `_to` is the address which created the smart contract
     /// @dev In order to mint iNFT for an exchange, set address `_to` as the location of the 
     ///   current smart contract
     /// @param _to The address to assign the iNFT to
