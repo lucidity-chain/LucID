@@ -48,13 +48,13 @@ interface LucID /* is ERC165 */ {
     ///   ownership with
     /// @param _new Hash of the information in the new iNFT, which the `_owner` wishes to exchange 
     ///   ownership for
-    /// @return Numerical exchange ID
-    function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable returns (uint256);
+    /// @return Byte array identifier for the exchange
+    function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable returns (bytes32);
     
     /// @notice Addresses call this function to consent to a certain exchange
     /// @dev Only the accounts which created the exchange can call this function
-    /// @param _bondID Numerical exchange ID
-    function signExchange(uint256 _bondID) external payable;
+    /// @param _exchangeID Byte array identifier for the exchange
+    function signExchange(uint256 _exchangeID) external payable;
     
     /// @notice Seals an exchange for iNFT replacement, transferring the _new iNFT from its
     ///   temporary ownership in the smart contract to the `_owner` address, and transferring
@@ -63,8 +63,8 @@ interface LucID /* is ERC165 */ {
     /// @dev Throw if one party has not signed the exchange
     /// @dev Throw if the `_new` iNFT is not owned by the smart contract
     /// @dev Throw if the `_old` iNFT is not owned by the `_owner`
-    /// @param _bondID Numerical exchange ID
-    function sealExchange(uint256 _bondID) external payable;
+    /// @param _exchangeID Byte array identifier for the exchange
+    function sealExchange(uint256 _exchangeID) external payable;
     
     /// @notice Name of issuing authority
     function name() external view returns (string memory);
