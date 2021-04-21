@@ -24,7 +24,7 @@ interface LucID /* is ERC165 */ {
     /// @dev Throw if `_infoHash` is not a valid iNFT
     /// @param _to New address which will own the iNFT
     /// @param _infoHash iNFT to transfer
-    function transferFrom(address _from, address _to, bytes32 _infoHash) external payable;
+    function transfer(address _to, bytes32 _infoHash) external payable;
     
     /// @notice Assign new iNFT to an address
     /// @dev Only the account which created the smart contract can call this function
