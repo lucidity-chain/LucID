@@ -20,10 +20,8 @@ interface LucID /* is ERC165 */ {
     
     /// @notice Transfers the ownership of an iNFT from one address to another address
     /// @dev Throw unless `msg.sender` is the current owner.
-    /// @dev Throw if `_from` is not the current owner.
     /// @dev Throw if `_to` is the zero address.
     /// @dev Throw if `_infoHash` is not a valid iNFT. 
-    /// @param _from Current address which owns the iNFT
     /// @param _to New address which will own the iNFT
     /// @param _infoHash iNFT to transfer
     function transferFrom(address _from, address _to, bytes32 _infoHash) external payable;
