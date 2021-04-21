@@ -11,12 +11,7 @@ interface LucID /* is ERC165 */ {
     /// @dev This emits when `_owner` exchanges ownership of the `_old` iNFT for ownership of
     ///   the `_new` iNFT. 
     event Exchange(address indexed _owner, bytes32 _old, bytes32 _new);
-
-    /// @notice Count all iNFTs assigned to an owner (by current contract)
-    /// @param _owner An address for whom to query the balance
-    /// @return The number of iNFTs owned by `_owner`, possibly zero
-    function iNFTsOf(address _owner) external view returns (uint256);
-
+    
     /// @notice Find the owner of an iNFT based on the sha-3 hash of its information
     /// @dev If no iNFT with the given hash exists, return the zero address.
     /// @param _infoHash The sha-3 hash of the information in an iNFT
