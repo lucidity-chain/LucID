@@ -6,11 +6,11 @@ interface LucID /* is ERC165 */ {
     event NewINFT(address indexed _to, bytes32 indexed _infoHash);
     
     /// @dev This emits when ownership of any iNFT changes by any mechanism
-    event iNFTTransfer(address indexed _from, address indexed _to, uint256 indexed _infoHash);
+    event iNFTTransfer(address indexed _from, address indexed _to, bytes32 indexed _infoHash);
     
     /// @dev This emits when `_owner` exchanges ownership of the `_old` iNFT for ownership of
     ///   the `_new` iNFT
-    event iNFTExchange(address indexed _owner, bytes32 _old, bytes32 _new);
+    event iNFTExchange(address indexed _owner, bytes32 indexed _old, bytes32 indexed _new);
     
     /// @notice Find the owner of an iNFT based on the sha-3 hash of its information
     /// @dev If no iNFT with the given hash exists, return the zero address.
