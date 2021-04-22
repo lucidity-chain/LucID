@@ -1,7 +1,7 @@
 pragma solidity ^0.8.0;
 
 /// @title LucID NFT Protocol
-interface ILucID /* is ERC165 */ {
+interface ILucID is ERC165 {
     /// @dev This emits when a new iNFT is minted
     event iNFTMinted(address indexed _to, bytes32 indexed _infoHash);
     
