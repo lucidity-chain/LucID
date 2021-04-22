@@ -2,7 +2,7 @@ pragma solidity ^0.8.0;
 
 import "./LucID_Interface.sol";
 
-contract LucID is ILucID {
+contract LucID is ILucID, ERC165 {
     struct Exchange {
         address iNFTOwner;
         bytes32 oldINFT;
