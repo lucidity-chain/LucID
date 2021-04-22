@@ -1,15 +1,8 @@
 pragma solidity ^0.8.0;
 
-contract LucID {
-    /// @dev This emits when a new iNFT is minted
-    event iNFTMinted(address indexed _to, bytes32 indexed _infoHash);
-    
-    /// @dev This emits when ownership of any iNFT changes by any mechanism.
-    event iNFTTransfer(address indexed _from, address indexed _to, bytes32 indexed _infoHash);
-    
-    /// @dev This emits when `_owner` exchanges ownership of the `_old` iNFT for ownership of the `_new` iNFT. 
-    event iNFTExchange(address indexed _owner, bytes32 indexed _old, bytes32 indexed _new);
-    
+import "./LucID_Interface.sol";
+
+contract LucID is ILucID {
     struct Exchange {
         address iNFTOwner;
         bytes32 oldINFT;
@@ -37,11 +30,11 @@ contract LucID {
         _docType = docType_;
     }
     
-    function ownerOf(bytes32 _infoHash) external view returns (address) {
+    function ownerOf(bytes32 _infoHash) external view override(ILucID) returns (address) {
         return _ownership[_infoHash];
     }
     
-    function transfer(address _to, bytes32 _infoHash) external payable {
+    function transfer(address _to, bytes32 _infoHash) external payable override(ILucID) {
         require(msg.sender == _ownership[_infoHash], "You don't own this, so don't pass it around!");
         require(_to != address(0), "The zero address isn't a good place to send stuff to!");
         require(_ownership[_infoHash] != address(0), "You can't send something that hasn't be created yet!");
@@ -50,7 +43,7 @@ contract LucID {
         emit iNFTTransfer(msg.sender, _to, _infoHash);
     }
     
-    function mintINFT(address _to, bytes32 _infoHash) external payable {
+    function mintINFT(address _to, bytes32 _infoHash) external payable override(ILucID) {
         require(msg.sender == _creatorAddr, "Hey, you don't own the priveleges to creat iNFTs yet!");
         require(_to != address(0), "Don't create iNFTs for the zero address!");
         require(_to != _creatorAddr, "You can't abuse this system. Don't even try creating IDs for yourself.");
@@ -59,7 +52,7 @@ contract LucID {
         emit iNFTMinted(_to, _infoHash);
     }
     
-    function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable returns (bytes32) {
+    function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable override(ILucID) returns (bytes32) {
         require(msg.sender == _owner || msg.sender == _creatorAddr, "You don't have the priveleges to create this exchange!");
         require(_ownership[_old] == _owner, "You can't exchange something you don't own!");
         
@@ -70,7 +63,7 @@ contract LucID {
         return newExchangeID;
     }
     
-    function signExchange(bytes32 _exchangeID) external payable {
+    function signExchange(bytes32 _exchangeID) external payable override(ILucID) {
         Exchange memory currentExchange = _exchanges[_exchangeID];
         require(msg.sender == currentExchange.iNFTOwner || msg.sender == _creatorAddr,
                 "You don't have the priveleges to sign this exchange!");
@@ -80,7 +73,7 @@ contract LucID {
         else currentExchange.creatorSigned = true;
     }
     
-    function sealExchange(bytes32 _exchangeID) external payable {
+    function sealExchange(bytes32 _exchangeID) external payable override(ILucID) {
         Exchange memory currentExchange = _exchanges[_exchangeID];
         require(msg.sender == currentExchange.iNFTOwner || msg.sender == _creatorAddr,
                 "You don't have the priveleges to seal this exchange!");
@@ -97,11 +90,15 @@ contract LucID {
         currentExchange.exchangeSealed = true;
     }
     
-    function name() external view returns (string memory) {
+    function name() external view override(ILucID) returns (string memory) {
         return _name;
     }
     
-    function docType() external view returns (string memory) {
+    function docType() external view override(ILucID) returns (string memory) {
         return _docType;
+    }
+    
+    function supportsInterface(bytes4 interfaceID) external pure override(ERC165) returns (bool) {
+        return interfaceID == type(ILucID).interfaceId;
     }
 }
