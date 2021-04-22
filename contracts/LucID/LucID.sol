@@ -1,7 +1,7 @@
 pragma solidity ^0.8.0;
 
 contract LucID {
-    // @dev This emits when a new iNFT is minted
+    /// @dev This emits when a new iNFT is minted
     event iNFTMinted(address indexed _to, bytes32 indexed _infoHash);
     
     /// @dev This emits when ownership of any iNFT changes by any mechanism.
