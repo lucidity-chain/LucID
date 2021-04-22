@@ -37,7 +37,6 @@ contract LucID {
         _docType = docType_;
     }
     
-    
     function ownerOf(bytes32 _infoHash) external view returns (address) {
         return _ownership[_infoHash];
     }
