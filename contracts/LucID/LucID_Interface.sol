@@ -50,6 +50,7 @@ interface LucID /* is ERC165 */ {
     
     /// @notice Addresses call this function to consent to a certain exchange
     /// @dev Throw unelss `msg.sender` is the `_owner` account or the account which created the smart contract
+    /// @dev Throw if exchange is already sealed
     /// @param _exchangeID Byte array identifier for the exchange
     function signExchange(uint256 _exchangeID) external payable;
     
@@ -60,6 +61,7 @@ interface LucID /* is ERC165 */ {
     /// @dev Throw if one party has not signed the exchange
     /// @dev Throw if the `_new` iNFT is not owned by the smart contract
     /// @dev Throw if the `_old` iNFT is not owned by the `_owner`
+    /// @dev Throw if exchange is already sealed
     /// @param _exchangeID Byte array identifier for the exchange
     function sealExchange(uint256 _exchangeID) external payable;
     
