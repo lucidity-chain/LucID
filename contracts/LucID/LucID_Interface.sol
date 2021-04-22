@@ -1,18 +1,7 @@
 pragma solidity ^0.8.0;
 
-/// @title ERC165 interface helper definition
-interface ERC165 {
-    /// @notice Query if a contract implements an interface
-    /// @param interfaceID The interface identifier, as specified in ERC-165
-    /// @dev Interface identification is specified in ERC-165. This function
-    ///  uses less than 30,000 gas.
-    /// @return `true` if the contract implements `interfaceID` and
-    ///  `interfaceID` is not 0xffffffff, `false` otherwise
-    function supportsInterface(bytes4 interfaceID) external view returns (bool);
-}
-
 /// @title LucID NFT Protocol
-interface ILucID is ERC165 {
+interface  ILucID  /* is  ERC165  */ {
     /// @dev This emits when a new iNFT is minted
     event iNFTMinted(address indexed _to, bytes32 indexed _infoHash);
     
@@ -81,4 +70,15 @@ interface ILucID is ERC165 {
     
     /// @notice Type of document the iNFTs represent
     function docType() external view returns (string memory);
+}
+
+/// @title ERC165 interface helper definition
+interface ERC165 {
+    /// @notice Query if a contract implements an interface
+    /// @param interfaceID The interface identifier, as specified in ERC-165
+    /// @dev Interface identification is specified in ERC-165. This function
+    ///  uses less than 30,000 gas.
+    /// @return `true` if the contract implements `interfaceID` and
+    ///  `interfaceID` is not 0xffffffff, `false` otherwise
+    function supportsInterface(bytes4 interfaceID) external view returns (bool);
 }
