@@ -27,7 +27,7 @@ interface LucID /* is ERC165 */ {
     function transfer(address _to, bytes32 _infoHash) external payable;
     
     /// @notice Assign new iNFT to an address
-    /// @dev Only the account which created the smart contract can call this function
+    /// @dev Throw unless `msg.sender` is the account which created the smart contract
     /// @dev Throw if `_to` is the zero address
     /// @dev Throw if `_to` is the address which created the smart contract
     /// @dev In order to mint iNFT for an exchange, set address `_to` as the location of the 
@@ -37,9 +37,8 @@ interface LucID /* is ERC165 */ {
     function mintINFT(address _to, bytes32 _infoHash) external payable;
     
     /// @notice Creates new exchange for iNFT replacement
-    /// @dev Only the `_owner` account or the account which created the smart contract can call
-    ///   this function
-    /// @dev Address `_owner` must own the `_old` token
+    /// @dev Throw unelss `msg.sender` the `_owner` account or the account which created the smart contract
+    /// @dev Throw if `_owner` doesn't own the `_old` token or if `_old` is not a valid token
     /// @dev Make sure the exchange ID is not taken already
     /// @param _owner Owner of the _old token
     /// @param _old Hash of the information in the old iNFT, which the `_owner` wishes to exchange
@@ -50,14 +49,14 @@ interface LucID /* is ERC165 */ {
     function createExchange(address _owner, bytes32 _old, bytes32 _new) external payable returns (bytes32);
     
     /// @notice Addresses call this function to consent to a certain exchange
-    /// @dev Only the accounts which created the exchange can call this function
+    /// @dev Throw unelss `msg.sender` the `_owner` account or the account which created the smart contract
     /// @param _exchangeID Byte array identifier for the exchange
     function signExchange(uint256 _exchangeID) external payable;
     
     /// @notice Seals an exchange for iNFT replacement, transferring the _new iNFT from its
     ///   temporary ownership in the smart contract to the `_owner` address, and transferring
     ///   the ownership of the `_old` iNFT to the smart contract
-    /// @dev Only the accounts which created the exchange can call this function
+    /// @dev Throw unelss `msg.sender` the `_owner` account or the account which created the smart contract
     /// @dev Throw if one party has not signed the exchange
     /// @dev Throw if the `_new` iNFT is not owned by the smart contract
     /// @dev Throw if the `_old` iNFT is not owned by the `_owner`
