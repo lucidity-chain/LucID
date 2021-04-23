@@ -72,7 +72,7 @@ interface  ILucID  /* is  ERC165  */ {
     function docType() external view returns (string memory);
 }
 
-/// @title ERC165 interface helper definition
+/// @title ERC165 interface helper definition from OpenZeppelin
 interface ERC165 {
     /// @notice Query if a contract implements an interface
     /// @param interfaceID The interface identifier, as specified in ERC-165
